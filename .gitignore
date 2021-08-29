@@ -1,0 +1,7 @@
+**/*.js
+**/*.d.ts
+!features/**/*
+!cucumber.js
+
+# Temporary directory for test execution
+tmp/

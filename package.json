@@ -1,0 +1,56 @@
+{
+  "name": "@badeball/cypress-parallel",
+  "version": "1.0.0-rc6",
+  "author": "Jonas Amundsen",
+  "license": "MIT",
+  "homepage": "https://github.com/badeball/cypress-parallel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/badeball/cypress-parallel.git"
+  },
+  "keywords": [
+    "cypress",
+    "cypress-parallel"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts"
+  ],
+  "bin": {
+    "cypress-parallel": "./bin/cypress-parallel"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "fmt": "prettier --ignore-path .gitignore --write '**/*.ts'",
+    "test": "npm run test:fmt && npm run test:integration",
+    "test:fmt": "prettier --ignore-path .gitignore --check '**/*.ts'",
+    "test:integration": "cucumber-js",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "dependencies": {
+    "@badeball/cypress-configuration": "^1.0.0-rc1",
+    "@badeball/mocha-knapsack-reporter": "^1.0.0-rc1",
+    "commander": "^8.1.0",
+    "cosmiconfig": "^7.0.1",
+    "cypress-multi-reporters": "^1.5.0",
+    "is-npm": "^5.0.0",
+    "shell-quote": "^1.7.2"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.3.1",
+    "@cucumber/pretty-formatter": "^1.0.0-alpha.1",
+    "@types/debug": "^4.1.7",
+    "@types/shell-quote": "^1.7.1",
+    "cypress": "^8.3.1",
+    "dtslint": "^4.0.5",
+    "esbuild": "^0.11.12",
+    "mocha": "^8.2.0",
+    "prettier": "^2.2.1",
+    "stream-buffers": "^3.0.2",
+    "strip-indent": "^3.0.0",
+    "typescript": "^4.0.3"
+  }
+}
