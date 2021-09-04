@@ -1,6 +1,6 @@
 {
   "name": "@badeball/cypress-parallel",
-  "version": "1.0.0-rc7",
+  "version": "1.0.0",
   "author": "Jonas Amundsen",
   "license": "MIT",
   "homepage": "https://github.com/badeball/cypress-parallel",
@@ -31,8 +31,8 @@
     "prepublishOnly": "npm run build && npm run test"
   },
   "dependencies": {
-    "@badeball/cypress-configuration": "^1.0.0-rc1",
-    "@badeball/mocha-knapsack-reporter": "^1.0.0-rc1",
+    "@badeball/cypress-configuration": "^1.0.0",
+    "@badeball/mocha-knapsack-reporter": "^1.0.0",
     "commander": "^8.1.0",
     "cosmiconfig": "^7.0.1",
     "cypress-multi-reporters": "^1.5.0",
