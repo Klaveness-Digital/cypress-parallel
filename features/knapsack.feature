@@ -1,5 +1,13 @@
 Feature: knapsack.json
   Rule: it should handle "any" knapsack
+    Scenario: knapsack missing entirely
+      Given a file named "cypress/integration/a.js" with:
+        """
+        it("should pass", () => {});
+        """
+      Given I run cypress-parallel with "--node 1:1"
+      Then it passes
+
     Scenario: knapsack missing a file
       Given a file named "cypress/integration/a.js" with:
         """
