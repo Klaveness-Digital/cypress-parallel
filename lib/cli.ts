@@ -220,6 +220,10 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
 
       const file = path.join(cypressConfiguration.projectRoot, entry[0]);
 
+      if (!testFiles.includes(file)) {
+        return weighedFiles;
+      }
+
       try {
         await fs.access(file, fsConstants.F_OK);
       } catch {
