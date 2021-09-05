@@ -49,7 +49,7 @@ Options:
                                    to 'npx cypress run' or 'yarn cypress run' depending on how invoked
   --node <index>:<count>           specifies number of buckets and which to run
   --knapsack <path>                specifies the path to the knapsack file (default: "knapsack.json")
-  --disable-knapsack-output        disabled knapsack output (default: false)
+  --disable-knapsack-output        disables knapsack output (default: false)
   --unweighed-strategy <strategy>  strategy to utilize for unweighed test files ('estimate' (default) |
                                    'distribute') (default: "estimate")
   -h, --help                       display help for command
@@ -122,7 +122,7 @@ test:
       - knapsack-$CI_NODE_INDEX.json
     expire_in: 1 day
   script:
-    - npx cypress-parallel --knapsack "knapsack-$CI_NODE_INDEX.json
+    - npx cypress-parallel --knapsack "knapsack-$CI_NODE_INDEX.json"
 
 knapsack:
   stage: Test (2)

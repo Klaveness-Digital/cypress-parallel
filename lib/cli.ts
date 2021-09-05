@@ -139,7 +139,7 @@ program.option(
   "knapsack.json"
 );
 
-program.option("--disable-knapsack-output", "disabled knapsack output", false);
+program.option("--disable-knapsack-output", "disables knapsack output", false);
 
 program.option(
   "--unweighed-strategy <strategy>",
