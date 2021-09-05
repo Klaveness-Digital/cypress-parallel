@@ -100,7 +100,7 @@ async function readKnapsack(filepath: string) {
       : path.join(process.cwd(), filepath);
 
     const maybeKnapsack = JSON.parse(
-      await (await fs.readFile(aboluteFilepath)).toString()
+      (await fs.readFile(aboluteFilepath)).toString()
     );
 
     if (isKnapsack(maybeKnapsack)) {
