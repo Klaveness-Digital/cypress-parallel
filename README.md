@@ -1,7 +1,8 @@
 # cypress-parallel
 
 Divides your test files into equal buckets and runs a single bucket. This is ideal for parallizing
-Cypress tests in a CI environment, without relying on Cypress' paid Dashboard Service.
+Cypress tests in a CI environment, without relying on external services, such as Cypress' Dashboard
+Service.
 
 ## Table of Contents
 
