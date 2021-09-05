@@ -60,14 +60,10 @@ function determineCypressRunCommand() {
 function parseNodeConfiguration(value: string) {
   const values = value.split(":");
 
-  const raise = () => {
+  if (values.length !== 2) {
     throw new InvalidArgumentError(
       "Expected --node configuration matching <index>:<total>"
     );
-  };
-
-  if (values.length !== 2) {
-    raise();
   }
 
   const [index, count] = values;
