@@ -1,4 +1,3 @@
-@no-default-knapsack
 Feature: --knapsack
   Rule: it should store knapsack at provided location (default 'knapsack.json')
     Background:

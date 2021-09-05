@@ -1,4 +1,3 @@
-@no-default-knapsack
 Feature: estimate (unweighed strategy)
   Rule: it should distribute unweighed files based off of content length (line numbers)
     Background:

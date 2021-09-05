@@ -9,8 +9,4 @@ Feature: --disable-knapsack-output
     Scenario:
       Given I run cypress-parallel with "--node 1:1 --disable-knapsack-output"
       Then it passes
-      # IE. no changes
-      And I should see a file "knapsack.json" with content:
-        """
-        {}
-        """
+      And I should not see a file named "knapsack.json"

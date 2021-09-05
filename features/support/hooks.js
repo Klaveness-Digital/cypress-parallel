@@ -39,10 +39,6 @@ Before(async function ({ gherkinDocument, pickle }) {
   );
 });
 
-Before({ tags: "not @no-default-knapsack" }, async function () {
-  await writeFile(path.join(this.tmpDir, "knapsack.json"), "{}");
-});
-
 After(function () {
   if (
     this.lastRun != null &&

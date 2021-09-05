@@ -1,4 +1,3 @@
-@no-default-knapsack
 Feature: distribute (unweighed strategy)
   Rule: it should distribute unweighed files evenly, despite content length
     Background:
