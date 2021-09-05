@@ -94,25 +94,41 @@ function parseUnweighedStrategy(value: string) {
 }
 
 async function readKnapsack(filepath: string) {
+  const aboluteFilepath = path.isAbsolute(filepath)
+    ? filepath
+    : path.join(process.cwd(), filepath);
+
+  let knapsackContent;
+
   try {
-    const aboluteFilepath = path.isAbsolute(filepath)
-      ? filepath
-      : path.join(process.cwd(), filepath);
-
-    const maybeKnapsack = JSON.parse(
-      (await fs.readFile(aboluteFilepath)).toString()
-    );
-
-    if (isKnapsack(maybeKnapsack)) {
-      return maybeKnapsack;
-    } else {
-      throw new CypressParallelError(
-        `Knapsack is wrongly formatted, got ${util.inspect(maybeKnapsack)}`
-      );
-    }
+    knapsackContent = (await fs.readFile(aboluteFilepath)).toString();
   } catch (e: any) {
-    console.warn(`Unable to read knapsack: ${e.message}`);
-    return {};
+    if (e?.code === "ENOENT") {
+      const knapsackName = path.basename(aboluteFilepath);
+
+      console.warn(`Unable to find ${knapsackName}, continuing without it...`);
+      return {};
+    } else {
+      throw new CypressParallelError(`Unable to read knapsack: ${e.message}`);
+    }
+  }
+
+  let maybeKnapsack;
+
+  try {
+    maybeKnapsack = JSON.parse(knapsackContent);
+  } catch {
+    throw new CypressParallelError(
+      `Knapsack isn't valid JSON, got ${util.inspect(knapsackContent)}`
+    );
+  }
+
+  if (isKnapsack(maybeKnapsack)) {
+    return maybeKnapsack;
+  } else {
+    throw new CypressParallelError(
+      `Knapsack is wrongly formatted, got ${util.inspect(maybeKnapsack)}`
+    );
   }
 }
 

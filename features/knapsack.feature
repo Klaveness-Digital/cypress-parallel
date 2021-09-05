@@ -1,12 +1,13 @@
 Feature: knapsack.json
-  Rule: it should handle "any" knapsack
+  Rule: it should handle any *normal* knapsack scenario somewhat gracefully, otherwise error
     Scenario: knapsack missing entirely
       Given a file named "cypress/integration/a.js" with:
         """
         it("should pass", () => {});
         """
       Given I run cypress-parallel with "--node 1:1"
-      Then it passes
+      Then stderr should containing a warning "Unable to find knapsack.json, continuing without it..."
+      But it passes
 
     Scenario: knapsack missing a file
       Given a file named "cypress/integration/a.js" with:
@@ -60,3 +61,48 @@ Feature: knapsack.json
       Given I run cypress-parallel with "--node 1:1"
       Then it passes
       And it should appear as if only a single test ran
+
+    Scenario: knapsack isn't JSON
+      Given a file named "cypress/integration/a.js" with:
+        """
+        it("should pass", () => {});
+        """
+      And a file named "knapsack.json" with:
+        """
+        foobar
+        """
+      Given I run cypress-parallel with "--node 1:1"
+      Then it fails
+      And the output should contain
+        """
+        Knapsack isn't valid JSON, got 'foobar'
+        """
+
+    Scenario: knapsack isn't a valid Record<string, number>
+      Given a file named "cypress/integration/a.js" with:
+        """
+        it("should pass", () => {});
+        """
+      And a file named "knapsack.json" with:
+        """
+        "foobar"
+        """
+      Given I run cypress-parallel with "--node 1:1"
+      Then it fails
+      And the output should contain
+        """
+        Knapsack is wrongly formatted, got 'foobar'
+        """
+
+    Scenario: knapsack isn't readable
+      Given a file named "cypress/integration/a.js" with:
+        """
+        it("should pass", () => {});
+        """
+      And an empty, but unreadable file named "knapsack.json"
+      Given I run cypress-parallel with "--node 1:1"
+      Then it fails
+      And the output should contain
+        """
+        Unable to read knapsack: EACCES: permission denied
+        """

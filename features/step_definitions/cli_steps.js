@@ -77,5 +77,9 @@ Then("it should appear to have run the specs", function (specsTable) {
 });
 
 Then("the output should contain", function (content) {
-  assert.match(this.lastRun.stdout, new RegExp(rescape(content)));
+  assert.match(this.lastRun.output, new RegExp(rescape(content)));
+});
+
+Then("stderr should containing a warning {string}", function (content) {
+  assert.match(this.lastRun.stderr, new RegExp(rescape(content)));
 });

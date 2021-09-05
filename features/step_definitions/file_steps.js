@@ -17,6 +17,20 @@ Given("an empty file named {string}", async function (filePath) {
   await writeFile(absoluteFilePath, "");
 });
 
+Given(
+  "an empty, but unreadable file named {string}",
+  async function (filePath) {
+    const absoluteFilePath = path.join(this.tmpDir, filePath);
+
+    await writeFile(absoluteFilePath, "");
+
+    /**
+     * I'm guessing it's created with 0755, so 355 is the u-r equivalent.
+     */
+    await fs.chmod(absoluteFilePath, 0o355);
+  }
+);
+
 Then(
   "I should nonetheless see a file named {string}",
   async function (filePath) {
