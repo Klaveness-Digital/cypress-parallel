@@ -11,10 +11,7 @@ export interface NodeConfiguration {
 
 export interface IParallelConfiguration {
   readonly cypressRunCommand: string;
-  readonly node: {
-    index: number;
-    count: number;
-  };
+  readonly node: NodeConfiguration;
   readonly knapsack: string;
   readonly disableKnapsackOutput: boolean;
   readonly unweighedStrategy: "estimate" | "distribute" | UnweighedStrategy;
