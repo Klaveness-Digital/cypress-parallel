@@ -43,7 +43,7 @@ import { isKnapsack, isString } from "./type-guards";
 
 import { compare } from "./unweighed-strategies/utils";
 
-import { version } from "../package.json";
+import { name, version } from "../package.json";
 
 function determineCypressRunCommand() {
   if (isNpm) {
@@ -118,7 +118,7 @@ async function readKnapsack(filepath: string) {
 
 const program = new Command();
 
-program.version(version, "-v, --version");
+program.version(`${name}-v${version}`, "-v, --version");
 
 program.allowUnknownOption();
 
