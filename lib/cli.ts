@@ -355,11 +355,13 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
 
     process.on("SIGINT", () => proc.kill("SIGINT"));
     process.on("SIGTERM", () => proc.kill("SIGTERM"));
-  } catch (e: any) {
+  } catch (e) {
     if (e instanceof CypressParallelError) {
       console.error(e.message);
-    } else {
+    } else if (e instanceof Error) {
       console.error(e.stack);
+    } else {
+      console.error(util.inspect(e));
     }
 
     process.exitCode = 1;
