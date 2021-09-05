@@ -1,5 +1,7 @@
 # cypress-parallel
 
+![build](https://github.com/badeball/cypress-parallel/actions/workflows/build.yml/badge.svg?branch=master)
+
 Divides your test files into equal buckets and runs a single bucket. This is ideal for parallizing
 Cypress tests in a CI environment, without relying on external services, such as Cypress' Dashboard
 Service.
