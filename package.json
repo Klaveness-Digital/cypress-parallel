@@ -22,13 +22,14 @@
     "cypress-parallel": "./bin/cypress-parallel"
   },
   "scripts": {
+    "clean": "bash -O globstar -c 'rm lib/**/*.{js,d.ts}'",
     "build": "tsc",
     "watch": "tsc --watch",
     "fmt": "prettier --ignore-path .gitignore --write '**/*.ts'",
     "test": "npm run test:fmt && npm run test:integration",
     "test:fmt": "prettier --ignore-path .gitignore --check '**/*.ts'",
     "test:integration": "cucumber-js",
-    "prepublishOnly": "npm run build && npm run test"
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
   },
   "dependencies": {
     "@badeball/cypress-configuration": "^1.0.0",
