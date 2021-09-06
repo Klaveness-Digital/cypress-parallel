@@ -18,7 +18,10 @@ jobs:
   test:
     needs: prepare-versions
     runs-on: ubuntu-20.04
-    container: cypress/base:14.17.0
+    container:
+      image: cypress/base:14.17.0
+      # Why exactly 1001? See https://github.com/actions/checkout/issues/211 and https://github.com/actions/runner/issues/691.
+      options: --user 1001
     strategy:
       matrix:
         cypress-version: ${{fromJson(needs.prepare-versions.outputs.matrix)}}
