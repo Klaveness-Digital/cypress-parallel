@@ -1,6 +1,7 @@
 **/*.js
 **/*.d.ts
 !features/**/*
+!cucumber.d.ts
 !cucumber.js
 
 # Temporary directory for test execution

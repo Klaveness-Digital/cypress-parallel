@@ -1,9 +1,9 @@
-const { Given, Then } = require("@cucumber/cucumber");
-const stripIndent = require("strip-indent");
-const path = require("path");
-const assert = require("assert");
-const { promises: fs, constants } = require("fs");
-const { writeFile } = require("../support/helpers");
+import { Given, Then } from "@cucumber/cucumber";
+import stripIndent from "strip-indent";
+import path from "path";
+import assert from "assert";
+import { promises as fs, constants } from "fs";
+import { writeFile } from "../support/helpers";
 
 Given("a file named {string} with:", async function (filePath, fileContent) {
   const absoluteFilePath = path.join(this.tmpDir, filePath);
@@ -38,7 +38,7 @@ Then(
 
     try {
       await fs.access(absoluteFilePath, constants.F_OK);
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === "ENOENT") {
         throw new Error(`Expected ${filePath} to exist, but it doesn't`);
       } else {
@@ -54,7 +54,7 @@ Then("I should not see a file named {string}", async function (filePath) {
   try {
     await fs.access(absoluteFilePath, constants.F_OK);
     throw new Error(`Expected ${filePath} to not exist, but it did`);
-  } catch (e) {
+  } catch (e: any) {
     if (e.code !== "ENOENT") {
       throw e;
     }
@@ -70,7 +70,7 @@ Then(
       const actualContent = (await fs.readFile(absoluteFilePath)).toString();
 
       assert.strictEqual(actualContent, expectedContent);
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === "ENOENT") {
         throw new Error(`Expected ${filePath} to exist, but it doesn't`);
       } else {
@@ -89,7 +89,7 @@ Then(
       const actualContent = (await fs.readFile(absoluteFilePath)).toString();
 
       assert.match(actualContent, new RegExp(expectedContentExpr));
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === "ENOENT") {
         throw new Error(`Expected ${filePath} to exist, but it doesn't`);
       } else {
