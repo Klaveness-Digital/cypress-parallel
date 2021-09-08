@@ -2,9 +2,9 @@
 
 ![build](https://github.com/badeball/cypress-parallel/actions/workflows/build.yml/badge.svg?branch=master)
 
-Divides your test files into equal buckets and runs a single bucket. This is ideal for parallizing
-Cypress tests in a CI environment, without relying on external services, such as Cypress' Dashboard
-Service.
+Divides your test files into equal buckets and runs a single bucket. This is
+ideal for parallizing Cypress tests in a CI environment, without relying on
+external services, such as Cypress' Dashboard Service.
 
 ## Table of Contents
 
@@ -30,13 +30,15 @@ $ npm install @badeball/cypress-parallel
 1. It will search through your project for test files
 2. A knapsack containing file weights is read (defaults to `knapsack.json`)
 3. Tests are divided into N buckets
-4. The Ith bucket is executed by passing `--spec` to Cypress with said bucket of files
+4. The Ith bucket is executed by passing `--spec` to Cypress with said bucket
+   of files
 5. The knapsack is overwritten with potentially new weights
 
-N and I is determined either by a flag `--node` or by environment variables for some CI providers.
+N and I is determined either by a flag `--node` or by environment variables for
+some CI providers.
 
-The overwritten knapsack can then be comitted back into VCS. This will allow the library to always
-divide your tests somewhat evenly among the nodes.
+The overwritten knapsack can then be comitted back into VCS. This will allow
+the library to always divide your tests somewhat evenly among the nodes.
 
 ## Usage
 
@@ -58,8 +60,8 @@ Options:
   -h, --help                       display help for command
 ```
 
-Unrecognized arguments are passed along to Cypress, so arguments such as `-e / --env` can be used
-as shown below
+Unrecognized arguments are passed along to Cypress, so arguments such as `-e /
+--env` can be used as shown below
 
 ```
 $ npx cypress-parallel --env foo=bar
@@ -67,8 +69,9 @@ $ npx cypress-parallel --env foo=bar
 
 ### --node \<index>:\<total>
 
-The utility will automatically pick up node configuration for some CI providers. Otherwise you can
-specify node index and total node count using `--node`, as shown below.
+The utility will automatically pick up node configuration for some CI
+providers. Otherwise you can specify node index and total node count using
+`--node`, as shown below.
 
 ```
 $ npx cypress-parallel --node 1:5
@@ -80,16 +83,18 @@ Specifies the location of the knapsack file. Defaults to `knapsack.json`.
 
 ### --disable-knapsack-output
 
-Disables outputting knapsack data to the file system. This is always disabled when you specify
-`--reporter` or `--reporter-options` to Cypress. If you require custom options and still want to
-obtain the knapsack output, you need to configure `cypress-multi-reporters` with
-`@badeball/mocha-knapsack-reporter` yourself.
+Disables outputting knapsack data to the file system. This is always disabled
+when you specify `--reporter` or `--reporter-options` to Cypress. If you
+require custom options and still want to obtain the knapsack output, you need
+to configure `cypress-multi-reporters` with `@badeball/mocha-knapsack-reporter`
+yourself.
 
 ### --unweighed-strategy "estimate" | "distribute"
 
-What strategy to utilize if encountering a test file that isn't contained in the knapsack. The
-"estimate" strategy will estimate expected execution time based off of file length (line numbers).
-The "distribute" strategy will merely distribute unknown files evenly amongst the nodes.
+What strategy to utilize if encountering a test file that isn't contained in
+the knapsack. The "estimate" strategy will estimate expected execution time
+based off of file length (line numbers).  The "distribute" strategy will merely
+distribute unknown files evenly amongst the nodes.
 
 Custom stragies can be implemented using [cusmiconfig][cusmiconfig], as shown below.
 
@@ -106,14 +111,15 @@ module.export = {
 
 ## CI configuration
 
-Below is an example of how to configure Gitlab CI to parallelize Cypress tests. Contributions of
-similar examples for other providers are welcome.
+Below is an example of how to configure Gitlab CI to parallelize Cypress tests.
+Contributions of similar examples for other providers are welcome.
 
 ### Gitlab CI
 
-This example illustrate two things, 1) running tests in parallel and 2) combining knapsack data into
-a single, downloadable artifact. The latter is completely optional and you need to decide for
-yourself how you want to handle this.
+This example illustrate two things, 1) running tests in parallel and 2)
+combining knapsack data into a single, downloadable artifact. The latter is
+completely optional and you need to decide for yourself how you want to handle
+this.
 
 ```yaml
 test:
