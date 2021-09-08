@@ -15,6 +15,7 @@ external services, such as Cypress' Dashboard Service.
   - [--knapsack \<file>](#--knapsack-file)
   - [--disable-knapsack-output](#--disable-knapsack-output)
   - [--unweighed-strategy "estimate" | "distribute"](#--unweighed-strategy-estimate--distribute)
+- [How to handle knapsack.json](#how-to-handle-knapsackjson)
 - [CI configuration](#ci-configuration)
   - [Gitlab CI](#gitlab-ci)
   - [Other providers](#other-providers)
@@ -108,6 +109,16 @@ module.export = {
 ```
 
 [cusmiconfig]: https://github.com/davidtheclark/cosmiconfig
+
+## How to handle knapsack.json
+
+The knapsack contains every test file's weight and is instrumental for dividing
+tests evenly among nodes. This file needs to be available during the run and it
+should ideally be kept up-to-date. One way of handling this is to check it into
+version control somewhat regularly. Another way of handling it is to make your
+CI provider cache the data and re-surface it on subsequent runs. This last
+approach requires you to combine the knapsack data for every node before
+caching it though, which may or may not be so easy depending on your provider.
 
 ## CI configuration
 
