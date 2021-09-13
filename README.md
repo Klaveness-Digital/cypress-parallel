@@ -157,7 +157,7 @@ knapsack:
 
 ### Other providers
 
-If your provider does to provide a keyword such as Gitlab's `parallel`, then you can always simply
+If your provider does not provide a keyword such as Gitlab's `parallel`, then you can always simply
 just create N explicit jobs, similar to that shown below.
 
 ```yaml
