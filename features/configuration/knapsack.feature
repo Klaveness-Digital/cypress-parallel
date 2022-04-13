@@ -25,7 +25,21 @@ Feature: --knapsack
         """
         {}
         """
-      And I run cypress-parallel with " --knapsack sackknap.json --node 1:1"
+      And I run cypress-parallel with "--knapsack sackknap.json --node 1:1"
+      Then it passes
+      And I should see a file "sackknap.json" with content matching:
+        """
+        {
+          "cypress/integration/a.js": \d+
+        }
+        """
+
+    Scenario: custom read & write location provided
+      Given a file named "knapsack.json" with:
+        """
+        {}
+        """
+      And I run cypress-parallel with "--read-knapsack knapsack.json --write-knapsack sackknap.json --node 1:1"
       Then it passes
       And I should see a file "sackknap.json" with content matching:
         """

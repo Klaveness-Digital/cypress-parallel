@@ -151,6 +151,16 @@ program.option(
   "knapsack.json"
 );
 
+program.option(
+  "--read-knapsack <path>",
+  "specifies the path to the knapsack file to read"
+);
+
+program.option(
+  "--write-knapsack <path>",
+  "specifies the path to the knapsack file to write"
+);
+
 program.option("--disable-knapsack-output", "disables knapsack output", false);
 
 program.option(
@@ -194,6 +204,8 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
       unweighedStrategy:
         (await resolveCustomStrategy()) || options.unweighedStrategy,
       knapsack: options.knapsack,
+      readKnapsack: options.readKnapsack,
+      writeKnapsack: options.writeKnapsack,
       disableKnapsackOutput: options.disableKnapsackOutput,
     };
 
@@ -221,7 +233,9 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
       unweighedStrategy = parallelConfiguration.unweighedStrategy;
     }
 
-    const knapsack = await readKnapsack(parallelConfiguration.knapsack);
+    const knapsack = await readKnapsack(
+      parallelConfiguration.readKnapsack ?? parallelConfiguration.knapsack
+    );
 
     const testFiles = getTestFiles({ argv, env, cwd });
 
@@ -305,7 +319,7 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
         );
 
         throw new CypressParallelError(
-          `The configured strategy produced ${outputFile}, which wasn't part of the input`
+          `The configured strategy produced ${relativePath}, which wasn't part of the input`
         );
       }
     }
@@ -334,7 +348,9 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
           JSON.stringify({
             reporterEnabled: "spec, @badeball/mocha-knapsack-reporter",
             badeballMochaKnapsackReporterReporterOptions: {
-              output: parallelConfiguration.knapsack,
+              output:
+                parallelConfiguration.writeKnapsack ??
+                parallelConfiguration.knapsack,
             },
           }),
         ];

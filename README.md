@@ -51,13 +51,15 @@ Usage: cypress-parallel [options]
 
 Options:
   -v, --version                    output the version number
-  --cypress-run-command <cmd>      specifies the command to run cypress (in non-interactive mode), defaults
-                                   to 'npx cypress run' or 'yarn cypress run' depending on how invoked
+  --cypress-run-command <cmd>      specifies the command to run cypress (in non-interactive mode), defaults to 'npx cypress
+                                   run' or 'yarn cypress run' depending on how invoked
   --node <index>:<count>           specifies number of buckets and which to run
   --knapsack <path>                specifies the path to the knapsack file (default: "knapsack.json")
+  --read-knapsack <path>           specifies the path to the knapsack file to read
+  --write-knapsack <path>          specifies the path to the knapsack file to write
   --disable-knapsack-output        disables knapsack output (default: false)
-  --unweighed-strategy <strategy>  strategy to utilize for unweighed test files ('estimate' (default) |
-                                   'distribute') (default: "estimate")
+  --unweighed-strategy <strategy>  strategy to utilize for unweighed test files ('estimate' (default) | 'distribute')
+                                   (default: "estimate")
   -h, --help                       display help for command
 ```
 
@@ -81,6 +83,14 @@ $ npx cypress-parallel --node 1:5
 ### --knapsack \<file>
 
 Specifies the location of the knapsack file. Defaults to `knapsack.json`.
+
+### --read-knapsack \<file>
+
+Optionally specified the location of the knapsack file to read.
+
+### --write-knapsack \<file>
+
+Optionally specified the location of the knapsack file to write.
 
 ### --disable-knapsack-output
 
@@ -142,7 +152,7 @@ test:
       - knapsack-$CI_NODE_INDEX.json
     expire_in: 1 day
   script:
-    - npx cypress-parallel --knapsack "knapsack-$CI_NODE_INDEX.json"
+    - npx cypress-parallel --write-knapsack "knapsack-$CI_NODE_INDEX.json"
 
 knapsack:
   stage: Test (2)
