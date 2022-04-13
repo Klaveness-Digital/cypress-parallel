@@ -16,13 +16,15 @@
   "types": "lib/index.d.ts",
   "files": [
     "lib/**/*.js",
-    "lib/**/*.d.ts"
+    "lib/**/*.d.ts",
+    "knapsack-reporter.js",
+    "knapsack-reporter.d.ts"
   ],
   "bin": {
     "cypress-parallel": "./bin/cypress-parallel"
   },
   "scripts": {
-    "clean": "bash -O globstar -c 'rm lib/**/*.{js,d.ts}'",
+    "clean": "rm -f knapsack-reporter.{js,d.ts} && bash -O globstar -c 'rm -f lib/**/*.{js,d.ts}'",
     "build": "tsc",
     "watch": "tsc --watch",
     "fmt": "prettier --ignore-path .gitignore --write '**/*.ts'",
@@ -33,7 +35,6 @@
   },
   "dependencies": {
     "@badeball/cypress-configuration": "^1.0.0",
-    "@badeball/mocha-knapsack-reporter": "^1.0.0",
     "commander": "^8.1.0",
     "cosmiconfig": "^7.0.1",
     "cypress-multi-reporters": "^1.5.0",
@@ -44,6 +45,7 @@
     "@cucumber/cucumber": "^7.3.1",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1",
     "@types/debug": "^4.1.7",
+    "@types/mocha": "^9.1.0",
     "@types/shell-quote": "^1.7.1",
     "@types/stream-buffers": "^3.0.4",
     "cypress": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",

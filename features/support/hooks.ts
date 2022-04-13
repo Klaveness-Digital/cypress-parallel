@@ -1,7 +1,7 @@
 import { After, Before, formatterHelpers } from "@cucumber/cucumber";
 import path from "path";
 import assert from "assert";
-import { promises as fs } from "fs";
+import { promises as fs, constants } from "fs";
 import { writeFile } from "./helpers";
 
 const projectPath = path.join(__dirname, "..", "..");
@@ -31,7 +31,7 @@ Before(async function ({ gherkinDocument, pickle }) {
     )
   );
 
-  await fs.mkdir(path.join(this.tmpDir, "node_modules"), {
+  await fs.mkdir(path.join(this.tmpDir, "node_modules", "@badeball"), {
     recursive: true,
   });
 
@@ -39,6 +39,20 @@ Before(async function ({ gherkinDocument, pickle }) {
     path.join(projectPath, "node_modules", "cypress-multi-reporters"),
     path.join(this.tmpDir, "node_modules", "cypress-multi-reporters")
   );
+
+  const selfLink = path.join(
+    projectPath,
+    "node_modules",
+    "@badeball",
+    "cypress-parallel"
+  );
+
+  try {
+    await fs.access(selfLink, constants.F_OK);
+    await fs.unlink(selfLink);
+  } catch {}
+
+  await fs.symlink(projectPath, selfLink, "dir");
 });
 
 After(function () {

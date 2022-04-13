@@ -346,8 +346,9 @@ export async function run(argv: string[], env: NodeJS.ProcessEnv, cwd: string) {
           "cypress-multi-reporters",
           "--reporter-options",
           JSON.stringify({
-            reporterEnabled: "spec, @badeball/mocha-knapsack-reporter",
-            badeballMochaKnapsackReporterReporterOptions: {
+            reporterEnabled:
+              "spec, @badeball/cypress-parallel/knapsack-reporter",
+            badeballCypressParallelKnapsackReporterReporterOptions: {
               output:
                 parallelConfiguration.writeKnapsack ??
                 parallelConfiguration.knapsack,

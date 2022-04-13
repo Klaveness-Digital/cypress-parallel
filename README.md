@@ -97,7 +97,7 @@ Optionally specified the location of the knapsack file to write.
 Disables outputting knapsack data to the file system. This is always disabled
 when you specify `--reporter` or `--reporter-options` to Cypress. If you
 require custom options and still want to obtain the knapsack output, you need
-to configure `cypress-multi-reporters` with `@badeball/mocha-knapsack-reporter`
+to configure `cypress-multi-reporters` with `@badeball/cypress-parallel/knapsack-reporter`
 yourself.
 
 ### --unweighed-strategy "estimate" | "distribute"
