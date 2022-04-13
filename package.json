@@ -1,12 +1,12 @@
 {
-  "name": "@badeball/cypress-parallel",
+  "name": "@klaveness/cypress-parallel",
   "version": "1.2.0",
   "author": "Jonas Amundsen",
   "license": "MIT",
-  "homepage": "https://github.com/badeball/cypress-parallel",
+  "homepage": "https://github.com/klaveness/cypress-parallel",
   "repository": {
     "type": "git",
-    "url": "https://github.com/badeball/cypress-parallel.git"
+    "url": "https://github.com/klaveness/cypress-parallel.git"
   },
   "keywords": [
     "cypress",
