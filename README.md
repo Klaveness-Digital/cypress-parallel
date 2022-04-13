@@ -1,6 +1,7 @@
 # cypress-parallel
 
-![build](https://github.com/badeball/cypress-parallel/actions/workflows/build.yml/badge.svg?branch=master)
+[![Build status](https://github.com/badeball/cypress-parallel/actions/workflows/build.yml/badge.svg)](https://github.com/badeball/cypress-parallel/actions/workflows/build.yml)
+[![Npm package weekly downloads](https://badgen.net/npm/dw/@badeball/cypress-parallel)](https://npmjs.com/package/@badeball/cypress-parallel)
 
 Divides your test files into equal buckets and runs a single bucket. This is
 ideal for parallizing Cypress tests in a CI environment, without relying on
